@@ -1,0 +1,261 @@
+/* Local Font Awesome Icons - SVG Based */
+
+/* Base icon styles */
+.fas {
+  display: inline-block;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+/* Spinner animation */
+@keyframes fa-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+/* Icons using Unicode/HTML Entities */
+.fas::before {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  display: inline-block;
+  margin-right: 0.3em;
+}
+
+/* Tasks icon */
+.fa-tasks::before {
+  content: '☑';
+}
+
+/* Home icon */
+.fa-home::before {
+  content: '⌂';
+}
+
+/* Project diagram icon */
+.fa-project-diagram::before {
+  content: '◉';
+}
+
+/* Plus circle icon */
+.fa-plus-circle::before {
+  content: '⊕';
+}
+
+/* Server icon */
+.fa-server::before {
+  content: '▦';
+}
+
+/* Play icon */
+.fa-play::before {
+  content: '▶';
+}
+
+/* Stop icon */
+.fa-stop::before {
+  content: '■';
+}
+
+/* Cube icon */
+.fa-cube::before {
+  content: '⬚';
+}
+
+/* Microchip icon */
+.fa-microchip::before {
+  content: '🔲';
+}
+
+/* Memory icon */
+.fa-memory::before {
+  content: '💾';
+}
+
+/* Plus icon */
+.fa-plus::before {
+  content: '+';
+}
+
+/* Folder icon */
+.fa-folder::before {
+  content: '📁';
+}
+
+/* Lightbulb icon */
+.fa-lightbulb::before {
+  content: '💡';
+}
+
+/* Save icon */
+.fa-save::before {
+  content: '💾';
+}
+
+/* Arrow left icon */
+.fa-arrow-left::before {
+  content: '←';
+}
+
+/* Redo icon */
+.fa-redo::before {
+  content: '↻';
+}
+
+/* List icon */
+.fa-list::before {
+  content: '☰';
+}
+
+/* Edit icon */
+.fa-edit::before {
+  content: '✎';
+}
+
+/* Trash icon */
+.fa-trash::before {
+  content: '🗑';
+}
+
+/* Spinner icon (loading) */
+.fa-spinner::before {
+  content: '⧗';
+}
+
+/* File icon */
+.fa-file::before {
+  content: '📄';
+}
+
+/* Directory/folder icons */
+.fa-folder-open::before {
+  content: '📂';
+}
+
+.fa-chevron-up::before {
+  content: '▲';
+}
+
+.fa-chevron-down::before {
+  content: '▼';
+}
+
+.fa-exclamation-triangle::before {
+  content: '⚠';
+}
+
+.fa-check-circle::before {
+  content: '✔';
+}
+
+.fa-times-circle::before {
+  content: '✘';
+}
+
+.fa-info-circle::before {
+  content: 'ⓘ';
+}
+
+.fa-lock::before {
+  content: '🔒';
+}
+
+.fa-unlock::before {
+  content: '🔓';
+}
+
+.fa-download::before {
+  content: '⬇';
+}
+
+.fa-upload::before {
+  content: '⬆';
+}
+
+.fa-refresh::before {
+  content: '↺';
+}
+
+.fa-search::before {
+  content: '🔍';
+}
+
+.fa-cog::before {
+  content: '⚙';
+}
+
+.fa-terminal::before {
+  content: '▬';
+}
+
+.fa-database::before {
+  content: '🗄';
+}
+
+.fa-code::before {
+  content: '📝';
+}
+
+.fa-bug::before {
+  content: '🐛';
+}
+
+.fa-warning::before {
+  content: '⚠';
+}
+
+.fa-question-circle::before {
+  content: '?';
+}
+
+.fa-calendar::before {
+  content: '📅';
+}
+
+.fa-clock::before {
+  content: '🕐';
+}
+
+.fa-arrow-up::before {
+  content: '▲';
+}
+
+.fa-arrow-down::before {
+  content: '▼';
+}
+
+.fa-arrow-right::before {
+  content: '→';
+}
+
+.fa-dot-circle::before {
+  content: '●';
+}
+
+.fa-circle::before {
+  content: '○';
+}
+
+.fa-check::before {
+  content: '✓';
+}
+
+.fa-times::before {
+  content: '✕';
+}

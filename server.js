@@ -21,6 +21,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve Socket.io client from node_modules locally
+app.use('/lib/socket.io', express.static(path.join(__dirname, 'node_modules', 'socket.io', 'client-dist')));
+
 // Import routes
 const projectRoutes = require('./routes/projects');
 const projectsEnhanced = require('./routes/projects-enhanced');
