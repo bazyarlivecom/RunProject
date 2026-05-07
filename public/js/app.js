@@ -299,6 +299,11 @@ function editProject(projectId) {
   document.getElementById('project-desc').value = project.description || '';
   document.getElementById('start-command').value = project.startCommand;
   document.getElementById('stop-command').value = project.stopCommand || '';
+  document.getElementById('project-tags').value = project.tags || '';
+  
+  if (project.projectType) {
+    document.getElementById('project-type-display').textContent = `نوع: ${project.projectType}`;
+  }
 
   document.getElementById('add-project-form').dataset.editId = projectId;
   navigateTo('add-project');
@@ -309,12 +314,38 @@ async function handleAddProject(e) {
   e.preventDefault();
 
   const editId = e.target.dataset.editId;
+  const tagsInput = document.getElementById('project-tags').value;
+  const tags = tagsInput ? tagsInput.split(',').map(t => t.trim()).filter(t => t) : [];
+
+  // Validation
+  const errors = [];
+  const name = document.getElementById('project-name').value;
+  const path = document.getElementById('project-path').value;
+  const startCommand = document.getElementById('start-command').value;
+
+  if (!name || name.trim() === '') errors.push('نام پروژه الزامی است');
+  if (!path || path.trim() === '') errors.push('مسیر پروژه الزامی است');
+  if (!startCommand || startCommand.trim() === '') errors.push('دستور شروع الزامی است');
+
+  if (errors.length > 0) {
+    document.getElementById('form-validation-errors').innerHTML = `
+      <div class="alert alert-error">
+        <strong>خطاهای اعتبار سنجی:</strong>
+        <ul>${errors.map(e => `<li>${e}</li>`).join('')}</ul>
+      </div>
+    `;
+    return;
+  }
+
+  document.getElementById('form-validation-errors').innerHTML = '';
+
   const data = {
-    name: document.getElementById('project-name').value,
-    path: document.getElementById('project-path').value,
+    name,
+    path,
     description: document.getElementById('project-desc').value,
-    startCommand: document.getElementById('start-command').value,
-    stopCommand: document.getElementById('stop-command').value
+    startCommand,
+    stopCommand: document.getElementById('stop-command').value,
+    tags
   };
 
   try {
@@ -341,7 +372,20 @@ async function handleAddProject(e) {
       delete e.target.dataset.editId;
     } else {
       const error = await response.json();
-      showNotification(error.error, 'error');
+      if (error.validation) {
+        document.getElementById('form-validation-errors').innerHTML = `
+          <div class="alert alert-error">
+            <strong>خطاهای اعتبار سنجی:</strong>
+            <ul>${error.validation.errors.map(e => `<li>${e}</li>`).join('')}</ul>
+            ${error.validation.warnings.length > 0 ? `
+              <strong>اخطارها:</strong>
+              <ul>${error.validation.warnings.map(w => `<li>${w}</li>`).join('')}</ul>
+            ` : ''}
+          </div>
+        `;
+      } else {
+        showNotification(error.error, 'error');
+      }
     }
   } catch (error) {
     showNotification('خطا در ذخیره پروژه', 'error');

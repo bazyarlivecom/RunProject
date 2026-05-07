@@ -129,32 +129,61 @@
 
             <div class="form-group">
               <label for="project-path">مسیر پروژه *</label>
-              <input type="text" id="project-path" placeholder="/home/user/projects/myproject" required>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" id="project-path" placeholder="/home/user/projects/myproject" required onchange="verifyPath(this)" style="flex: 1;">
+                <button type="button" class="btn btn-info" onclick="openPathBrowser()">
+                  <i class="fas fa-folder"></i> مرور - Browse
+                </button>
+              </div>
+              <div id="path-verification" style="margin-top: 10px;"></div>
+              <div id="project-type-display" style="margin-top: 8px; color: #667eea; font-weight: 500;"></div>
             </div>
 
             <div class="form-group">
-              <label for="project-desc">توضیحات</label>
+              <label for="project-tags">برچسب ها - Tags</label>
+              <input type="text" id="project-tags" placeholder="برچسب ها را با کاما جدا کنید - Separate tags with commas">
+            </div>
+
+            <div class="form-group">
+              <label for="project-desc">توضیحات - Description</label>
               <textarea id="project-desc" placeholder="توضیحات پروژه..."></textarea>
             </div>
 
-            <div class="form-group">
-              <label for="start-command">دستور شروع *</label>
-              <input type="text" id="start-command" placeholder="npm start یا python app.py یا غیره" required>
-            </div>
+            <div style="background: #f0f4ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
+              <h4 style="margin-bottom: 10px;">دستورات - Commands</h4>
+              
+              <div class="form-group">
+                <label for="start-command">دستور شروع *</label>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  <input type="text" id="start-command" placeholder="npm start یا python app.py" required style="flex: 1;">
+                  <button type="button" class="btn btn-sm btn-info" title="دستورات ممکن" onclick="showCommandSuggestions()">
+                    <i class="fas fa-lightbulb"></i>
+                  </button>
+                </div>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                  مثال: npm start, python app.py, node server.js
+                </small>
+              </div>
 
-            <div class="form-group">
-              <label for="stop-command">دستور متوقف کردن</label>
-              <input type="text" id="stop-command" placeholder="اختیاری">
+              <div class="form-group">
+                <label for="stop-command">دستور متوقف کردن - Stop Command</label>
+                <input type="text" id="stop-command" placeholder="اختیاری - Optional">
+                <small style="color: #666; margin-top: 5px; display: block;">
+                  اگر خالی باشد، فرایند بطور خودکار کشته می شود
+                </small>
+              </div>
             </div>
 
             <div class="form-actions">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> ذخیره
+                <i class="fas fa-save"></i> ذخیره - Save
               </button>
               <button type="button" class="btn btn-secondary" onclick="navigateTo('projects')">
-                <i class="fas fa-arrow-left"></i> بازگشت
+                <i class="fas fa-arrow-left"></i> بازگشت - Back
               </button>
             </div>
+
+            <div id="form-validation-errors" style="margin-top: 15px;"></div>
           </form>
         </div>
       </div>
@@ -222,6 +251,7 @@
   </div>
 
   <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="/js/file-browser.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>

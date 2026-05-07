@@ -23,13 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Import routes
 const projectRoutes = require('./routes/projects');
+const projectsEnhanced = require('./routes/projects-enhanced');
 const systemRoutes = require('./routes/system');
+const browserRoutes = require('./routes/browser');
 
 // Initialize database
 const db = require('./db/database');
 
 // API Routes
-app.use('/api/projects', projectRoutes);
+app.use('/api/projects', projectsEnhanced);
+app.use('/api/browser', browserRoutes);
 app.use('/api/system', systemRoutes);
 
 // Serve main page
