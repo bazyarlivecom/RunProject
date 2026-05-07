@@ -443,7 +443,82 @@ function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
 
+/**
+ * Show command suggestions based on project type
+ */
+async function showCommandSuggestions() {
+  const path = document.getElementById('project-path').value;
+  
+  if (!path) {
+    showNotification('ابتدا مسیری انتخاب کنید - Please select a path first', 'error');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/browser/suggestions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path })
+    });
+
+    if (!response.ok) {
+      showNotification('خطا در دریافت پیشنهادها', 'error');
+      return;
+    }
+
+    const { projectType, suggestions } = await response.json();
+
+    let html = `
+      <h3>دستورات پیشنهادی - Suggested Commands</h3>
+      <p><strong>نوع پروژه:</strong> ${projectType.name}</p>
+      <div style="background: #f5f7fa; padding: 15px; border-radius: 8px;">
+    `;
+
+    if (suggestions.startCommand) {
+      html += `
+        <div style="margin: 10px 0;">
+          <strong>دستور شروع:</strong>
+          <div style="background: white; padding: 8px; border-radius: 4px; margin-top: 5px; cursor: pointer;" onclick="document.getElementById('start-command').value = '${suggestions.startCommand}'; closeModal(); showNotification('دستور اعمال شد', 'success')">
+            <code>${suggestions.startCommand}</code>
+          </div>
+        </div>
+      `;
+    }
+
+    if (suggestions.stopCommand) {
+      html += `
+        <div style="margin: 10px 0;">
+          <strong>دستور متوقف:</strong>
+          <div style="background: white; padding: 8px; border-radius: 4px; margin-top: 5px; cursor: pointer;" onclick="document.getElementById('stop-command').value = '${suggestions.stopCommand}'; closeModal(); showNotification('دستور اعمال شد', 'success')">
+            <code>${suggestions.stopCommand}</code>
+          </div>
+        </div>
+      `;
+    }
+
+    if (suggestions.alternates && suggestions.alternates.length > 0) {
+      html += `
+        <div style="margin-top: 15px;">
+          <strong>دستورات دیگر:</strong>
+          ${suggestions.alternates.map(cmd => `
+            <div style="background: white; padding: 8px; border-radius: 4px; margin-top: 5px; cursor: pointer;" onclick="document.getElementById('start-command').value = '${cmd}'; closeModal(); showNotification('دستور اعمال شد', 'success')">
+              <code>${cmd}</code>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    html += '</div>';
+
+    showModal(html);
+  } catch (error) {
+    showNotification(`خطا - ${error.message}`, 'error');
+  }
+}
+
 // Add animations
+
 const style = document.createElement('style');
 style.textContent = `
   @keyframes slideIn {
