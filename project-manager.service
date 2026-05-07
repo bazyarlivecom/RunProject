@@ -1,0 +1,18 @@
+[Unit]
+Description=Ubuntu Project Manager
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/home/user/RunProject
+ExecStart=/usr/bin/node /home/user/RunProject/server.js
+Restart=on-failure
+RestartSec=10
+StandardOutput=inherit
+StandardError=inherit
+Environment="NODE_ENV=production"
+Environment="PORT=3000"
+
+[Install]
+WantedBy=multi-user.target

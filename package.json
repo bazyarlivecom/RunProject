@@ -1,0 +1,29 @@
+{
+  "name": "ubuntu-project-manager",
+  "version": "1.0.0",
+  "description": "مدیر پروژه ها برای سرور اوبونتو - Ubuntu Project Manager",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "project-manager",
+    "ubuntu",
+    "process-management"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "child_process": "^1.0.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "socket.io": "^4.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
